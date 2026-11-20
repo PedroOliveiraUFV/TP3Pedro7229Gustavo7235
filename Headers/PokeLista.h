@@ -15,9 +15,9 @@ void fazlistavazia(Pokelista* lista);
 int listaehvazia(Pokelista* lista);
 void inserenalista(Pokelista* lista, Pokemon poke);
 void imprimeLista(Pokelista* lista);
-void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, int* tempoS);
-void quickSortPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, int* tempoS);
-void ordenaQS(Pokelista* lista, int Esq, int Dir, int* nComparacoes, int* nMovimentacoes, int* tempoS);
-void particionaQS(Pokelista* lista, int Esq, int Dir, int *i, int *j, int* nComparacoes, int* nMovimentacoes, int* tempoS);
+void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS);
+void quickSortPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS);
+void ordenaQS(Pokelista* lista, int Esq, int Dir, int* nComparacoes, int* nMovimentacoes);
+void particionaQS(Pokelista* lista, int Esq, int Dir, int *i, int *j, int* nComparacoes, int* nMovimentacoes);
 
 #endif

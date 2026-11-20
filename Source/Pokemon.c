@@ -13,5 +13,5 @@ void inicializa_pokemon(Pokemon *poke, int num, char nome[], char tipo[], int po
 }
 
 void imprime_pokemon(Pokemon *poke) { //Imprime as informacoes do pokemon//
-    printf("ID: %-3d | Nome: %-13s | Tipo: %-8s | Poder: %-2d", poke -> n_pokedex, poke -> nome, poke -> tipo, poke -> poder);
+    printf("ID: %-3d | Nome: %-13s | Tipo: %-8s | Poder: %-2d\n", poke -> n_pokedex, poke -> nome, poke -> tipo, poke -> poder);
 }

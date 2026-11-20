@@ -22,7 +22,12 @@ void inserenalista(Pokelista* lista, Pokemon poke){
     lista->ultimo++;
 }
 
-void imprimeLista(Pokelista* lista);
+void imprimeLista(Pokelista* lista){
+    for(int i = 0; i<lista->ultimo; i++){
+        printf("%d. ",i+1);
+        imprime_pokemon(&lista->Item[i]);
+    }
+}
 
 void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS){
     *nComparacoes = 0;
@@ -34,7 +39,7 @@ void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, do
         min = i;
         for(j = i+1; j<n;j++){
             (*nComparacoes)++;
-            if(lista->Item[j]<lista->Item[min]){
+            if(lista->Item[j].poder<lista->Item[min].poder || (lista->Item[j].poder==lista->Item[min].poder && lista->Item[j].n_pokedex<lista->Item[min].n_pokedex)){
                 min = j;
             }
             (*nMovimentacoes)++;
@@ -67,12 +72,13 @@ void ordenaQS(Pokelista* lista, int Esq, int Dir, int* nComparacoes, int* nMovim
 
 void particionaQS(Pokelista* lista, int Esq, int Dir, int *i, int *j, int* nComparacoes, int* nMovimentacoes){
     Pokemon aux;
-    int pivo;
+    int pivoPoder, pivoNPokedex;
     *i = Esq; *j = Dir;
-    pivo = lista->Item[(*i+*j)/2].poder;
+    pivoPoder = lista->Item[(*i+*j)/2].poder;
+    pivoNPokedex = lista->Item[(*i+*j)/2].n_pokedex;
     do{
-        while(pivo>lista->Item[i].poder) (*i)++;
-        while(pivo<lista->Item[j].poder) (*j)--;
+        while(pivoPoder>lista->Item[i].poder || (pivoPoder==lista->Item[i].poder && pivoNPokedex>lista->Item[i].n_pokedex)) (*i)++;
+        while(pivoPoder<lista->Item[j].poder || (pivoPoder==lista->Item[j].poder && pivoNPokedex<lista->Itemji].n_pokedex)) (*j)--;
         if (*i <= *j){
             (*nMovimentacoes)++;
             aux = lista->Item[i].poder;

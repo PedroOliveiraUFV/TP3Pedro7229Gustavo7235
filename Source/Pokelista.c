@@ -6,7 +6,7 @@
 
 void fazlistavazia(Pokelista* lista){
     lista -> primeiro = INICIO;
-    lista -> ultimo = primeiro;
+    lista -> ultimo = lista -> primeiro;
 }
 
 int listaehvazia(Pokelista* lista){
@@ -14,24 +14,25 @@ int listaehvazia(Pokelista* lista){
 }
 
 void inserenalista(Pokelista* lista, Pokemon poke){
-    if(lista.ultimo==MAXTAM){
-        printf("Maximo de Pokemons da Lista Atingido. Max: 10000\n");
+    if(lista -> ultimo==MAXTAM){
+        printf("Maximo de Pokemons da Lista Atingido. Max: 50000\n");
         return;
     }
-    lista->Item[ultimo] = poke;
+    lista->Item[lista -> ultimo] = poke;
     lista->ultimo++;
 }
 
-void imprimeLista(Pokelista* lista){
+void imprimeLista(FILE* arq, Pokelista* lista){
     for(int i = 0; i<lista->ultimo; i++){
-        printf("%d. ",i+1);
-        imprime_pokemon(&lista->Item[i]);
+        fprintf(arq, "%d. ",i+1);
+        imprime_pokemon(arq, &lista->Item[i]);
     }
 }
 
 void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS){
     *nComparacoes = 0;
     *nMovimentacoes = 0;
+    int n = lista -> ultimo;
     clock_t inicio = clock();
     int i, j, min;
     Pokemon aux;
@@ -42,32 +43,36 @@ void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, do
             if(lista->Item[j].poder<lista->Item[min].poder || (lista->Item[j].poder==lista->Item[min].poder && lista->Item[j].n_pokedex<lista->Item[min].n_pokedex)){
                 min = j;
             }
-            (*nMovimentacoes)++;
-            aux = lista->Item[min];
-            lista->Item[min] = lista->Item[i];
-            lista->Item[i] = aux;
         }
+        (*nMovimentacoes)++;
+        aux = lista->Item[min];
+        lista->Item[min] = lista->Item[i];
+        lista->Item[i] = aux;
     }
     clock_t fim = clock();
-    tempoS = (double)(fim - inicio)/CLOCKS_PER_SEC;
+    *tempoS = (double)(fim - inicio)/CLOCKS_PER_SEC;
 }
 
 void quickSortPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS){
     *nComparacoes = 0;
     *nMovimentacoes = 0;
     clock_t inicio = clock();
-    ordenaQS(lista, lista->primeiro, lista->ultimo-1, nComparacoes, nMovimentacoes);
+    ordenaQS(lista, lista->primeiro, lista->ultimo -1, nComparacoes, nMovimentacoes);
     clock_t fim = clock();
-    tempoS = (double)(fim - inicio)/CLOCKS_PER_SEC;
+    *tempoS = (double)(fim - inicio)/CLOCKS_PER_SEC;
 }
 
 void ordenaQS(Pokelista* lista, int Esq, int Dir, int* nComparacoes, int* nMovimentacoes){
     int i, j;
     particionaQS (lista, Esq, Dir, &i, &j, nComparacoes, nMovimentacoes);
     (*nComparacoes)++;
-    if(Esq<j) ordenaQS(lista, Esq, j, nComparacoes, nMovimentacoes);
+    if(Esq<j) {
+        ordenaQS(lista, Esq, j, nComparacoes, nMovimentacoes);
+    }
     (*nComparacoes)++;
-    if(i<Dir) ordenaQS(lista, i, Dir, nComparacoes, nMovimentacoes);
+    if(i<Dir) {
+        ordenaQS(lista, i, Dir, nComparacoes, nMovimentacoes);
+    }
 }
 
 void particionaQS(Pokelista* lista, int Esq, int Dir, int *i, int *j, int* nComparacoes, int* nMovimentacoes){
@@ -77,13 +82,13 @@ void particionaQS(Pokelista* lista, int Esq, int Dir, int *i, int *j, int* nComp
     pivoPoder = lista->Item[(*i+*j)/2].poder;
     pivoNPokedex = lista->Item[(*i+*j)/2].n_pokedex;
     do{
-        while(pivoPoder>lista->Item[i].poder || (pivoPoder==lista->Item[i].poder && pivoNPokedex>lista->Item[i].n_pokedex)) (*i)++;
-        while(pivoPoder<lista->Item[j].poder || (pivoPoder==lista->Item[j].poder && pivoNPokedex<lista->Itemji].n_pokedex)) (*j)--;
+        while(pivoPoder>lista->Item[*i].poder || (pivoPoder==lista->Item[*i].poder && pivoNPokedex>lista->Item[*i].n_pokedex)) (*i)++;
+        while(pivoPoder<lista->Item[*j].poder || (pivoPoder==lista->Item[*j].poder && pivoNPokedex<lista->Item[*j].n_pokedex)) (*j)--;
         if (*i <= *j){
             (*nMovimentacoes)++;
-            aux = lista->Item[i].poder;
-            lista->Item[i].poder = lista->Item[j].poder;
-            lista->Item[j].poder = aux;
+            aux = lista->Item[*i];
+            lista->Item[*i] = lista->Item[*j];
+            lista->Item[*j] = aux;
             (*i)++; (*j)--;
         }
     }while(*i<=*j);

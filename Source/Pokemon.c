@@ -9,9 +9,9 @@ void inicializa_pokemon(Pokemon *poke, int num, char nome[], char tipo[], int po
     strcpy(poke -> nome, nome);
     strcpy(poke -> tipo, tipo);
 
-    poke -> poder = forca;
+    poke -> poder = poder;
 }
 
-void imprime_pokemon(Pokemon *poke) { //Imprime as informacoes do pokemon//
-    printf("ID: %-3d | Nome: %-13s | Tipo: %-8s | Poder: %-2d\n", poke -> n_pokedex, poke -> nome, poke -> tipo, poke -> poder);
+void imprime_pokemon(FILE* arq, Pokemon *poke) { //Imprime as informacoes do pokemon//
+    fprintf(arq, "ID: %-3d | Nome: %-13s | Tipo: %-8s | Poder: %-2d\n", poke -> n_pokedex, poke -> nome, poke -> tipo, poke -> poder);
 }

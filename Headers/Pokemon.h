@@ -9,6 +9,6 @@ typedef struct {
 } Pokemon;
 
 void inicializa_pokemon(Pokemon *poke, int num, char nome[], char tipo[], int poder);
-void imprime_pokemon(Pokemon *poke);
+void imprime_pokemon(FILE* arq, Pokemon *poke);
 
 #endif

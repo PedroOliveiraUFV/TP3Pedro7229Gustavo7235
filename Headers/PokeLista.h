@@ -3,7 +3,7 @@
 
 #include "Pokemon.h"
 
-#define MAXTAM 10000
+#define MAXTAM 50000
 #define INICIO 0
 
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 void fazlistavazia(Pokelista* lista);
 int listaehvazia(Pokelista* lista);
 void inserenalista(Pokelista* lista, Pokemon poke);
-void imprimeLista(Pokelista* lista);
+void imprimeLista(FILE* arq, Pokelista* lista);
 void selecaoPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS);
 void quickSortPokemon(Pokelista* lista, int* nComparacoes, int* nMovimentacoes, double* tempoS);
 void ordenaQS(Pokelista* lista, int Esq, int Dir, int* nComparacoes, int* nMovimentacoes);

@@ -6,7 +6,13 @@ int lerArquivos(Pokelista* lista1, Pokelista* lista2){
     char nomep[50], tipo[30];
     int quant, num_poke, poder;
 
-    if(fscanf(arq, "%d", &quant)!= 1){
+    FILE *arq = fopen("teste.txt", "r");
+    if(arq == NULL){
+        printf("Erro ao ler a entrada\n");
+        return 0;
+    }
+
+    if(fscanf(arq, "%d", &quant) != 1){
         printf("Erro ao ler quantidade de pokemons.");
         return 0;
     }
@@ -24,10 +30,37 @@ int lerArquivos(Pokelista* lista1, Pokelista* lista2){
     return 1;
 }
 
+int escreveResultados(Pokelista* lista1, Pokelista* lista2){
+    FILE* Res;
+
+    Res = fopen("ResultadoSelecao.txt", "w");
+    if(Res == NULL){
+        printf("Erro ao escrever resultados do Seleção\n");
+        return 0;
+    }
+    fprintf(Res, "Resultado do algoritimo de seleção:\n\n");
+    imprimeLista(Res, lista1);
+    fclose(Res);
+
+    Res = fopen("ResultadoQuickSort.txt", "w");
+    if(Res == NULL){
+        printf("Erro ao escrever resultados do QuickSort\n");
+        return 0;
+    }
+    fprintf(Res, "Resultado do algoritimo de QuickSort:\n\n");
+    imprimeLista(Res, lista2);
+    fclose(Res);
+
+    return 1;
+}
+
 int main(){
     Pokelista listaSL, listaQS;
+    fazlistavazia(&listaSL);
+    fazlistavazia(&listaQS);
+
     if(!lerArquivos(&listaSL, &listaQS)){
-        printf("Erro ao ler arquivos")
+        printf("Erro ao ler arquivos");
         return 0;
     }
 
@@ -39,18 +72,22 @@ int main(){
     printf("Resultados Algoritmo Selecao:\n");
     printf("Comparacoes: %d\n", Comparacoes);
     printf("Movimentacoes: %d\n", Movimentacoes);
-    printf("Tempo (segundos): %.2f\n", TempoS);
+    printf("Tempo (segundos): %.5f\n", TempoS);
     printf("Lista Organizada\n");
-    imprimeLista(&listaSL);
-
+    
+    printf("---------------------------------------------------------\n");
+    
     quickSortPokemon(&listaQS,&Comparacoes,&Movimentacoes, &TempoS);
 
     printf("Resultados Algoritmo QuickSort:\n");
     printf("Comparacoes: %d\n", Comparacoes);
     printf("Movimentacoes: %d\n", Movimentacoes);
-    printf("Tempo (segundos): %.2f\n", TempoS);
+    printf("Tempo (segundos): %.5f\n", TempoS);
     printf("Lista Organizada\n");
-    imprimeLista(&listaQS);
+
+    if(!escreveResultados(&listaSL, &listaQS)){
+        printf("Erro ao escrever Resultados");
+    }
 
     return 0;
 }

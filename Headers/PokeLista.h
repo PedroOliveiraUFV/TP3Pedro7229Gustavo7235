@@ -3,7 +3,7 @@
 
 #include "Pokemon.h"
 
-#define MAXTAM 50000
+#define MAXTAM 10000
 #define INICIO 0
 
 typedef struct {

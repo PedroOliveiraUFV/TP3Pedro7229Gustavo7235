@@ -93,5 +93,7 @@ int main(){
         printf("Erro ao escrever Resultados");
     }
 
+    liberarListas(&centrodepesquisa);
+
     return 0;
 }

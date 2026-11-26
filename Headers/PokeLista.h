@@ -12,6 +12,7 @@ typedef struct {
 } Pokelista;
 
 void fazlistavazia(Pokelista* lista, int maxtam);
+void liberarLista(Pokelista* lista);
 int listaehvazia(Pokelista* lista);
 void inserenalista(Pokelista* lista, Pokemon poke);
 void imprimeLista(FILE* arq, Pokelista* lista);

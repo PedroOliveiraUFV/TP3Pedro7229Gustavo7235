@@ -12,6 +12,15 @@ void fazlistavazia(Pokelista* lista, int maxtam){
     lista -> ultimo = lista -> primeiro;
 }
 
+void liberarLista(Pokelista* lista){
+    if(lista -> Item == NULL) return;
+    lista -> MAXTAM = 0;
+    free(lista -> Item);
+    lista -> Item = NULL;
+    lista -> primeiro = INICIO;
+    lista -> ultimo = lista -> primeiro;
+}
+
 int listaehvazia(Pokelista* lista){
     return lista->primeiro == lista->ultimo;
 }

@@ -8,6 +8,11 @@ void inicializaCentro(Centro *centro, int quant){
     fazlistavazia(&centro->listaQS, quant);
 }
 
+void liberarListas(Centro *centro){
+    liberarLista(&centro->listaSL);
+    liberarLista(&centro->listaQS);
+}
+
 void selecaoPokemon(Centro *centro, int* nComparacoes, int* nMovimentacoes, double* tempoS){
     *nComparacoes = 0;
     *nMovimentacoes = 0;

@@ -59,8 +59,8 @@ void particionaQS(Centro *centro, int Esq, int Dir, int *i, int *j, int* nCompar
     pivoPoder = centro->listaQS.Item[(*i+*j)/2].poder;
     pivoNPokedex = centro->listaQS.Item[(*i+*j)/2].n_pokedex;
     do{
-        while(++nComparacoes, pivoPoder>centro->listaQS.Item[*i].poder || (pivoPoder==centro->listaQS.Item[*i].poder && pivoNPokedex>centro->listaQS.Item[*i].n_pokedex)) (*i)++;
-        while(++nComparacoes, pivoPoder<centro->listaQS.Item[*j].poder || (pivoPoder==centro->listaQS.Item[*j].poder && pivoNPokedex<centro->listaQS.Item[*j].n_pokedex)) (*j)--;
+        while(++(*nComparacoes), pivoPoder>centro->listaQS.Item[*i].poder || (pivoPoder==centro->listaQS.Item[*i].poder && pivoNPokedex>centro->listaQS.Item[*i].n_pokedex)) (*i)++;
+        while(++(*nComparacoes), pivoPoder<centro->listaQS.Item[*j].poder || (pivoPoder==centro->listaQS.Item[*j].poder && pivoNPokedex<centro->listaQS.Item[*j].n_pokedex)) (*j)--;
         if (*i <= *j){
             (*nMovimentacoes)++;
             aux = centro->listaQS.Item[*i];

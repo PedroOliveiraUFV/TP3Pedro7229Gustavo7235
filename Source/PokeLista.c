@@ -2,7 +2,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "../Headers/Pokelista.h"
+#include "../Headers/PokeLista.h"
 
 void fazlistavazia(Pokelista* lista){
     lista -> primeiro = INICIO;

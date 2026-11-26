@@ -3,9 +3,9 @@
 
 #include "../Headers/CentrodePesquisa.h"
 
-void inicializaCentro(Centro *centro){
-    fazlistavazia(&centro->listaSL);
-    fazlistavazia(&centro->listaQS);
+void inicializaCentro(Centro *centro, int quant){
+    fazlistavazia(&centro->listaSL, quant);
+    fazlistavazia(&centro->listaQS, quant);
 }
 
 void selecaoPokemon(Centro *centro, int* nComparacoes, int* nMovimentacoes, double* tempoS){

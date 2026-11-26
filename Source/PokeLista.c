@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <time.h>
 
 #include "../Headers/PokeLista.h"
 
-void fazlistavazia(Pokelista* lista){
+void fazlistavazia(Pokelista* lista, int maxtam){
+    lista -> MAXTAM = maxtam;
+    lista -> Item = (Pokemon*)malloc(lista -> MAXTAM * sizeof(Pokemon));
     lista -> primeiro = INICIO;
     lista -> ultimo = lista -> primeiro;
 }
@@ -14,8 +17,8 @@ int listaehvazia(Pokelista* lista){
 }
 
 void inserenalista(Pokelista* lista, Pokemon poke){
-    if(lista -> ultimo==MAXTAM){
-        printf("Maximo de Pokemons da Lista Atingido. Max: 50000\n");
+    if(lista -> ultimo==lista -> MAXTAM){
+        printf("Maximo de Pokemons da Lista Atingido. Max: %d\n", lista -> MAXTAM);
         return;
     }
     lista->Item[lista -> ultimo] = poke;

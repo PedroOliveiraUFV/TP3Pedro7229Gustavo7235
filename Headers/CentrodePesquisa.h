@@ -8,7 +8,7 @@ typedef struct {
     Pokelista listaQS;
 } Centro;
 
-void inicializaCentro(Centro *centro);
+void inicializaCentro(Centro *centro, int quant);
 void selecaoPokemon(Centro *centro, int* nComparacoes, int* nMovimentacoes, double* tempoS);
 void quickSortPokemon(Centro *centro, int* nComparacoes, int* nMovimentacoes, double* tempoS);
 void ordenaQS(Centro *centro, int Esq, int Dir, int* nComparacoes, int* nMovimentacoes);

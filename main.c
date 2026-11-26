@@ -20,6 +20,8 @@ int lerArquivos(Centro *centro){
         return 0;
     }
 
+    inicializaCentro(centro, quant);
+
     for(int i = 0; i < quant; ++i){
         if(fscanf(arq, "%d %49s %29s %d", &num_poke, nomep, tipo, &poder) != 4){
             printf("Erro ao ler os pokemons.");
@@ -60,7 +62,6 @@ int escreveResultados(Centro *centro){
 int main(){
 
     Centro centrodepesquisa;
-    inicializaCentro(&centrodepesquisa);
 
     if(!lerArquivos(&centrodepesquisa)){
         printf("Erro ao ler arquivos");

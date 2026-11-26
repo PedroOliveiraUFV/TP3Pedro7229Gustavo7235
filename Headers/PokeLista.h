@@ -3,15 +3,15 @@
 
 #include "Pokemon.h"
 
-#define MAXTAM 10000
 #define INICIO 0
 
 typedef struct {
-    Pokemon Item[MAXTAM];
+    Pokemon* Item;
     int primeiro, ultimo;
+    int MAXTAM;
 } Pokelista;
 
-void fazlistavazia(Pokelista* lista);
+void fazlistavazia(Pokelista* lista, int maxtam);
 int listaehvazia(Pokelista* lista);
 void inserenalista(Pokelista* lista, Pokemon poke);
 void imprimeLista(FILE* arq, Pokelista* lista);

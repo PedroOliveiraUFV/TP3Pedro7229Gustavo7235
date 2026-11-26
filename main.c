@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include "Headers/Pokelista.h"
 
-int lerArquivos(Pokelista* lista1, Pokelista* lista2){
+#include "Headers/Pokelista.h"
+#include "Headers/Pokemon.h"
+#include "Headers/CentrodePesquisa.h"
+
+int lerArquivos(Centro *centro){
     char nomep[50], tipo[30];
     int quant, num_poke, poder;
 
@@ -24,13 +27,13 @@ int lerArquivos(Pokelista* lista1, Pokelista* lista2){
         }
         Pokemon pikachu;
         inicializa_pokemon(&pikachu, num_poke, nomep, tipo, poder);
-        inserenalista(lista1, pikachu);
-        inserenalista(lista2, pikachu);
+        inserenalista(&centro->listaSL, pikachu);
+        inserenalista(&centro->listaQS, pikachu);
     }
     return 1;
 }
 
-int escreveResultados(Pokelista* lista1, Pokelista* lista2){
+int escreveResultados(Centro *centro){
     FILE* Res;
 
     Res = fopen("ResultadoSelecao.txt", "w");
@@ -39,7 +42,7 @@ int escreveResultados(Pokelista* lista1, Pokelista* lista2){
         return 0;
     }
     fprintf(Res, "Resultado do algoritimo de seleção:\n\n");
-    imprimeLista(Res, lista1);
+    imprimeLista(Res, &centro->listaSL);
     fclose(Res);
 
     Res = fopen("ResultadoQuickSort.txt", "w");
@@ -48,18 +51,18 @@ int escreveResultados(Pokelista* lista1, Pokelista* lista2){
         return 0;
     }
     fprintf(Res, "Resultado do algoritimo de QuickSort:\n\n");
-    imprimeLista(Res, lista2);
+    imprimeLista(Res, &centro->listaQS);
     fclose(Res);
 
     return 1;
 }
 
 int main(){
-    Pokelista listaSL, listaQS;
-    fazlistavazia(&listaSL);
-    fazlistavazia(&listaQS);
 
-    if(!lerArquivos(&listaSL, &listaQS)){
+    Centro centrodepesquisa;
+    inicializaCentro(&centrodepesquisa);
+
+    if(!lerArquivos(&centrodepesquisa)){
         printf("Erro ao ler arquivos");
         return 0;
     }
@@ -67,7 +70,7 @@ int main(){
     double TempoS;
     int Movimentacoes, Comparacoes;
 
-    selecaoPokemon(&listaSL,&Comparacoes,&Movimentacoes, &TempoS);
+    selecaoPokemon(&centrodepesquisa,&Comparacoes,&Movimentacoes, &TempoS);
 
     printf("Resultados Algoritmo Selecao:\n");
     printf("Comparacoes: %d\n", Comparacoes);
@@ -77,7 +80,7 @@ int main(){
     
     printf("---------------------------------------------------------\n");
     
-    quickSortPokemon(&listaQS,&Comparacoes,&Movimentacoes, &TempoS);
+    quickSortPokemon(&centrodepesquisa,&Comparacoes,&Movimentacoes, &TempoS);
 
     printf("Resultados Algoritmo QuickSort:\n");
     printf("Comparacoes: %d\n", Comparacoes);
@@ -85,7 +88,7 @@ int main(){
     printf("Tempo (segundos): %.5f\n", TempoS);
     printf("Lista Organizada\n");
 
-    if(!escreveResultados(&listaSL, &listaQS)){
+    if(!escreveResultados(&centrodepesquisa)){
         printf("Erro ao escrever Resultados");
     }
 

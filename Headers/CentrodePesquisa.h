@@ -1,7 +1,7 @@
 #ifndef CENTRODEPESQUISA_H
 #define CENTRODEPESQUISA_H
 
-#include "Pokelista.h"
+#include "PokeLista.h"
 
 typedef struct {
     Pokelista listaSL;

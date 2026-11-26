@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "Headers/Pokelista.h"
+#include "Headers/PokeLista.h"
 #include "Headers/Pokemon.h"
 #include "Headers/CentrodePesquisa.h"
 
@@ -9,7 +9,7 @@ int lerArquivos(Centro *centro){
     char nomep[50], tipo[30];
     int quant, num_poke, poder;
 
-    FILE *arq = fopen("teste.txt", "r");
+    FILE *arq = fopen("entrada.txt", "r");
     if(arq == NULL){
         printf("Erro ao ler a entrada\n");
         return 0;
